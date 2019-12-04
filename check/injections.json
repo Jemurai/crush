@@ -1,0 +1,26 @@
+[
+    {
+        "name": "clojure read-string",
+        "description": "clojure read-string is dangerous",
+        "magic": "read-string",
+        "exts" : [
+            ".clj"
+        ],
+        "tags": [
+            "clojure",
+            "injection"
+        ]
+    },
+    {
+        "name": "clojure shell",
+        "description": "clojure shell can be dangerous",
+        "magic": "clojure.java.shell",
+        "exts" : [
+            ".clj"
+        ],
+        "tags": [
+            "clojure",
+            "injection"
+        ]
+    }
+]
