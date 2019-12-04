@@ -6,11 +6,11 @@ A simple tool to assist with code review.
 
 The most basic use will run the tool on a directory of code.
 
-`crh examine --directory /your/code/here`
+`crush examine --directory /your/code/here`
 
 ## Installation
 
-`go get github.com/jemurai/crh`
+`go get github.com/jemurai/crush`
 
 ## Setting Expectations
 
