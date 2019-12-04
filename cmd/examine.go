@@ -17,6 +17,7 @@ package cmd
 import (
 	"bufio"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -49,23 +50,25 @@ Behind the scenes, crh checks a variety of things.`,
 		print("Examine command on: " + opts.Directory)
 		checks := getAllChecks(opts)
 		files := getFiles(opts)
+		var findings []finding.Finding
 		var wg sync.WaitGroup
 		for i := 0; i < len(files); i++ {
 			wg.Add(1)
 			fn := files[i]
 			go func(fn string, opts options.Options) {
 				defer wg.Done()
-				processFile(fn, checks, opts)
+				findings = append(findings, processFile(fn, checks, opts)...)
 			}(fn, opts)
 		}
 		wg.Wait()
+		fjson, _ := json.MarshalIndent(findings, "", " ")
+		fmt.Printf("[%s]", fjson)
 		utils.Timing(start, "Elasped time: %f")
 	},
 }
 
 func processFile(fn string, checks []check.Check, options options.Options) []finding.Finding {
-	log.Debugf("Processing %s", fn)
-
+	// log.Debugf("Processing %s", fn)
 	lines, err := readLines(fn)
 	if err != nil {
 		log.Errorf("Error reading file %s", fn)
@@ -77,14 +80,30 @@ func processFile(fn string, checks []check.Check, options options.Options) []fin
 			findings = append(findings, fs...)
 		}
 	}
-	log.Debugf("\tProcessed %s", fn)
+	// log.Debugf("\tProcessed %s", fn)
 	return findings
 }
 
 func doCheck(file string, lineno int, check check.Check, line string) []finding.Finding {
 	var findings []finding.Finding
-	//log.Debugf("Check: %s", check.Magic)
+
 	r, _ := regexp.Compile(check.Magic)
+	if lineno == 1 { // Do this once per file.
+		matched := r.MatchString(file)
+		if matched {
+			finding := finding.Finding{
+				Name:        check.Name,
+				Description: check.Description,
+				Detail:      line,
+				Source:      check.Name,
+				Location:    file,
+			}
+			log.Errorf("Finding: %v", finding)
+			findings = append(findings, finding)
+		}
+	}
+
+	//log.Debugf("Check: %s", check.Magic)
 	matched := r.MatchString(line)
 	if matched {
 		finding := finding.Finding{
@@ -97,12 +116,16 @@ func doCheck(file string, lineno int, check check.Check, line string) []finding.
 		log.Errorf("Finding: %v", finding)
 		findings = append(findings, finding)
 	}
+
 	return findings
 }
 
 func getAllChecks(opts options.Options) []check.Check {
 	var checks []check.Check
 	checks = append(checks, getChecks("check/injections.json")...)
+	checks = append(checks, getChecks("check/secrets.json")...)
+	checks = append(checks, getChecks("check/files.json")...)
+	checks = append(checks, getChecks("check/unescaped.json")...)
 	return checks
 }
 

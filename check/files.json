@@ -1,0 +1,80 @@
+[
+    {
+    "name": "Sensitive file included (PEM)",
+    "description": "Sensitive file included.",
+    "magic": ".pem",
+    "exts" : [
+        ".pem"
+    ],
+    "tags": [
+        "secrets",
+        "sensitive-data-exposure"
+    ]
+},{
+    "name": "Sensitive file included (KEY)",
+    "description": "Sensitive file included.",
+    "magic": ".key",
+    "exts" : [
+        ".key"
+    ],
+    "tags": [
+        "secrets",
+        "sensitive-data-exposure"
+    ]
+},{
+    "name": "Sensitive file included (Cert)",
+    "description": "Sensitive file included.",
+    "magic": ".cert",
+    "exts" : [
+        ".cert"
+    ],
+    "tags": [
+        "secrets",
+        "sensitive-data-exposure"
+    ]
+},{
+    "name": "Sensitive file included (crt)",
+    "description": "Sensitive file included.",
+    "magic": ".crt",
+    "exts" : [
+        ".crt"
+    ],
+    "tags": [
+        "secrets",
+        "sensitive-data-exposure"
+    ]
+},{
+    "name": "Sensitive file included (p12)",
+    "description": "Sensitive file included.",
+    "magic": ".p12",
+    "exts" : [
+        ".p12"
+    ],
+    "tags": [
+        "secrets",
+        "sensitive-data-exposure"
+    ]
+},{
+    "name": "Sensitive file included (keystore)",
+    "description": "Sensitive file included.",
+    "magic": ".keystore",
+    "exts" : [
+        ".keystore"
+    ],
+    "tags": [
+        "secrets",
+        "sensitive-data-exposure"
+    ]
+},{
+    "name": "Sensitive file included (id_rsa)",
+    "description": "Sensitive file included.",
+    "magic": "id_rsa",
+    "exts" : [
+        "id_rsa"
+    ],
+    "tags": [
+        "secrets",
+        "sensitive-data-exposure"
+    ]
+}
+]

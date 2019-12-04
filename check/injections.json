@@ -1,5 +1,43 @@
 [
     {
+        "name": "Java runtime exec",
+        "description": "Java Runtime.exec is dangerous because it executes arbitrary code",
+        "magic": "Runtime.exec",
+        "exts" : [
+            ".java"
+        ],
+        "tags": [
+            "java",
+            "injection"
+        ]
+    },
+    {
+        "name": "JavaScript evaluation",
+        "description": "JavaScript eval is dangerous because it executes arbitrary code",
+        "magic": " eval",
+        "exts" : [
+            ".js",
+            ".ts"
+        ],
+        "tags": [
+            "javascript",
+            "typescirpt",
+            "injection"
+        ]
+    },
+    {
+        "name": "Ruby command evalutation",
+        "description": "Ruby shell exec is dangerous because it executes arbitrary code",
+        "magic": "shell_exec",
+        "exts" : [
+            ".rb"
+        ],
+        "tags": [
+            "ruby",
+            "injection"
+        ]
+    },
+    {
         "name": "clojure read-string",
         "description": "clojure read-string is dangerous",
         "magic": "read-string",
