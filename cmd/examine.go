@@ -47,7 +47,7 @@ Behind the scenes, crh checks a variety of things.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		start := time.Now()
 		opts := buildExamineOptions(cmd)
-		print("Examine command on: " + opts.Directory)
+		log.Debugf("Examine command on: %s", opts.Directory)
 		checks := getAllChecks(opts)
 		files := getFiles(opts)
 		var findings []finding.Finding
@@ -62,7 +62,9 @@ Behind the scenes, crh checks a variety of things.`,
 		}
 		wg.Wait()
 		fjson, _ := json.MarshalIndent(findings, "", " ")
-		fmt.Printf("[%s]", fjson)
+		fmt.Printf("%s", fjson)
+		howMany := check.CountHowManyRan(checks)
+		log.Debugf("\n\nSummary:\n\tFiles processed: %v \n\tChecks: %v \n\tIssues: %v", len(files), howMany, len(findings))
 		utils.Timing(start, "Elasped time: %f")
 	},
 }
@@ -76,19 +78,21 @@ func processFile(fn string, checks []check.Check, options options.Options) []fin
 	var findings []finding.Finding
 	for i := 0; i < len(lines); i++ {
 		for j := 0; j < len(checks); j++ {
-			fs := doCheck(fn, i, checks[j], lines[i])
-			findings = append(findings, fs...)
+			if check.AppliesToTag(checks[j], options.Tag) && check.AppliesToExt(checks[j], options.Ext) {
+				fs := doCheck(fn, i, checks[j], lines[i], options)
+				findings = append(findings, fs...)
+			}
 		}
 	}
 	// log.Debugf("\tProcessed %s", fn)
 	return findings
 }
 
-func doCheck(file string, lineno int, check check.Check, line string) []finding.Finding {
+func doCheck(file string, lineno int, check check.Check, line string, options options.Options) []finding.Finding {
 	var findings []finding.Finding
-
+	check.Ran = true
 	r, _ := regexp.Compile(check.Magic)
-	if lineno == 1 { // Do this once per file.
+	if lineno == 1 { // Do this once per file - for things like file name.
 		matched := r.MatchString(file)
 		if matched {
 			finding := finding.Finding{
@@ -98,7 +102,7 @@ func doCheck(file string, lineno int, check check.Check, line string) []finding.
 				Source:      check.Name,
 				Location:    file,
 			}
-			log.Errorf("Finding: %v", finding)
+			log.Debugf("Finding: %v", finding)
 			findings = append(findings, finding)
 		}
 	}
@@ -113,7 +117,7 @@ func doCheck(file string, lineno int, check check.Check, line string) []finding.
 			Source:      check.Name,
 			Location:    file,
 		}
-		log.Errorf("Finding: %v", finding)
+		log.Debugf("Finding: %v", finding)
 		findings = append(findings, finding)
 	}
 
@@ -179,8 +183,13 @@ func readLines(path string) ([]string, error) {
 
 func buildExamineOptions(cmd *cobra.Command) options.Options {
 	directory := viper.GetString("directory")
+	tag := viper.GetString("tag")
+	ext := viper.GetString("ext")
+
 	options := options.Options{
 		Directory: directory,
+		Tag:       tag,
+		Ext:       ext,
 	}
 
 	debug := viper.GetBool("debug")
@@ -198,8 +207,13 @@ func init() {
 
 	examineCmd.PersistentFlags().String("directory", "", "The directory to examine.")
 	examineCmd.MarkFlagRequired("directory")
-
 	viper.BindPFlag("directory", examineCmd.PersistentFlags().Lookup("directory"))
+
+	examineCmd.PersistentFlags().String("tag", "", "The tag for checks to rug.")
+	viper.BindPFlag("tag", examineCmd.PersistentFlags().Lookup("tag"))
+
+	examineCmd.PersistentFlags().String("ext", "", "The file extension for checks to rug.")
+	viper.BindPFlag("ext", examineCmd.PersistentFlags().Lookup("ext"))
 
 	log.SetFormatter(&log.TextFormatter{})
 	log.SetLevel(log.DebugLevel)
