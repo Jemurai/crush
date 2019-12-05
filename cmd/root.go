@@ -35,7 +35,7 @@ var rootCmd = &cobra.Command{
 Many types of security issues cannot be found with static 
 analysis and are amenable to developer review.
 
-Use crh help to get more information about using crh.
+Use crush help to get more information about using crush.
 `,
 }
 

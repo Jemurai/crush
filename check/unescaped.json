@@ -4,7 +4,8 @@
         "description": "Rails uses HTML Safe to mark strings that are safe for HTML.",
         "magic": "html_safe",
         "exts" : [
-            ".rb"
+            ".rb",
+            ".erb"
         ],
         "tags": [
             "ruby",
@@ -15,7 +16,8 @@
         "description": "Spring Thymeleaf (templating) does not output encode tags with utext",
         "magic": "utext",
         "exts" : [
-            ".java"
+            ".java",
+            ".jsp"
         ],
         "tags": [
             "java",

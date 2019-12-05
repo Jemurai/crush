@@ -28,6 +28,8 @@ import (
 	"github.com/jemurai/crush/check"
 	"github.com/jemurai/crush/options"
 	"github.com/jemurai/crush/utils"
+
+	fkitread "github.com/jemurai/fkit/cmd"
 	"github.com/jemurai/fkit/finding"
 
 	log "github.com/sirupsen/logrus"
@@ -61,12 +63,64 @@ Behind the scenes, crh checks a variety of things.`,
 			}(fn, opts)
 		}
 		wg.Wait()
+
+		if opts.Compare != "" {
+			added := doCompare(opts.Compare, findings)
+			printFindings(added, checks, files) // only printing new added findings
+		} else {
+			printFindings(findings, checks, files)
+		}
+		utils.Timing(start, "Elasped time: %f")
+	},
+}
+
+func printFindings(findings []finding.Finding, checks []check.Check, files []string) {
+	if len(findings) > 0 {
 		fjson, _ := json.MarshalIndent(findings, "", " ")
 		fmt.Printf("%s", fjson)
 		howMany := check.CountHowManyRan(checks)
-		log.Debugf("\n\nSummary:\n\tFiles processed: %v \n\tChecks: %v \n\tIssues: %v", len(files), howMany, len(findings))
-		utils.Timing(start, "Elasped time: %f")
-	},
+		log.Debugf("\n\nSummary:\n\tFiles processed: %v \n\tChecks: %v (Not working yet) \n\tIssues: %v", len(files), howMany, len(findings))
+	} else {
+		fmt.Print("[]")
+	}
+}
+
+func doCompare(file string, findings []finding.Finding) []finding.Finding {
+	log.Debugf("Doing compare with %s and %v findings", file, len(findings))
+	oldFindings := fkitread.BuildFindingsFromFile(file)
+	log.Debugf("Old findings: count %v", len(oldFindings))
+
+	var added []finding.Finding
+	var fixed []finding.Finding
+	found := false
+
+	// Do diff. Start with fixed.
+	for i := 0; i < len(oldFindings); i++ {
+		found = false
+		for j := 0; j < len(findings); j++ {
+			if oldFindings[i].Fingerprint == findings[j].Fingerprint {
+				found = true
+			}
+		}
+		if !found {
+			fixed = append(fixed, oldFindings[i])
+		}
+	}
+
+	// Now look for new
+	for i := 0; i < len(findings); i++ {
+		found = false
+		for j := 0; j < len(oldFindings); j++ {
+			if findings[i].Fingerprint == oldFindings[j].Fingerprint {
+				found = true
+			}
+		}
+		if !found {
+			added = append(added, findings[i])
+		}
+	}
+	log.Debugf("\n\nSummary:\n\tIssues Fixed: %v\n\tNew Issues: %v", len(fixed), len(added))
+	return added
 }
 
 func processFile(fn string, checks []check.Check, options options.Options) []finding.Finding {
@@ -90,7 +144,9 @@ func processFile(fn string, checks []check.Check, options options.Options) []fin
 
 func doCheck(file string, lineno int, check check.Check, line string, options options.Options) []finding.Finding {
 	var findings []finding.Finding
-	check.Ran = true
+
+	check.Ran = true // TODO: Figure out how to track this.
+
 	r, _ := regexp.Compile(check.Magic)
 	if lineno == 1 { // Do this once per file - for things like file name.
 		matched := r.MatchString(file)
@@ -101,13 +157,13 @@ func doCheck(file string, lineno int, check check.Check, line string, options op
 				Detail:      line,
 				Source:      check.Name,
 				Location:    file,
+				Fingerprint: utils.Fingerprint(check.Name + ":" + file),
 			}
 			log.Debugf("Finding: %v", finding)
 			findings = append(findings, finding)
 		}
 	}
 
-	//log.Debugf("Check: %s", check.Magic)
 	matched := r.MatchString(line)
 	if matched {
 		finding := finding.Finding{
@@ -116,6 +172,7 @@ func doCheck(file string, lineno int, check check.Check, line string, options op
 			Detail:      line,
 			Source:      check.Name,
 			Location:    file,
+			Fingerprint: utils.Fingerprint(check.Name + file + line),
 		}
 		log.Debugf("Finding: %v", finding)
 		findings = append(findings, finding)
@@ -155,7 +212,6 @@ func getFiles(options options.Options) []string {
 				return err
 			}
 			if !info.IsDir() {
-				//log.Debugf("File %s", path)
 				files = append(files, path)
 			}
 			return nil
@@ -185,11 +241,13 @@ func buildExamineOptions(cmd *cobra.Command) options.Options {
 	directory := viper.GetString("directory")
 	tag := viper.GetString("tag")
 	ext := viper.GetString("ext")
+	compare := viper.GetString("compare")
 
 	options := options.Options{
 		Directory: directory,
 		Tag:       tag,
 		Ext:       ext,
+		Compare:   compare,
 	}
 
 	debug := viper.GetBool("debug")
@@ -209,11 +267,14 @@ func init() {
 	examineCmd.MarkFlagRequired("directory")
 	viper.BindPFlag("directory", examineCmd.PersistentFlags().Lookup("directory"))
 
-	examineCmd.PersistentFlags().String("tag", "", "The tag for checks to rug.")
+	examineCmd.PersistentFlags().String("tag", "", "The tag for checks to run.")
 	viper.BindPFlag("tag", examineCmd.PersistentFlags().Lookup("tag"))
 
-	examineCmd.PersistentFlags().String("ext", "", "The file extension for checks to rug.")
+	examineCmd.PersistentFlags().String("ext", "", "The file extension for checks to run.")
 	viper.BindPFlag("ext", examineCmd.PersistentFlags().Lookup("ext"))
+
+	examineCmd.PersistentFlags().String("compare", "", "The file to compare new results to.")
+	viper.BindPFlag("compare", examineCmd.PersistentFlags().Lookup("compare"))
 
 	log.SetFormatter(&log.TextFormatter{})
 	log.SetLevel(log.DebugLevel)
