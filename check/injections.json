@@ -8,7 +8,8 @@
         ],
         "tags": [
             "java",
-            "injection"
+            "injection",
+            "commandinjection"
         ]
     },
     {
@@ -22,7 +23,8 @@
         "tags": [
             "javascript",
             "typescirpt",
-            "injection"
+            "injection",
+            "commandinjection"
         ]
     },
     {
@@ -34,7 +36,8 @@
         ],
         "tags": [
             "ruby",
-            "injection"
+            "injection",
+            "commandinjection"
         ]
     },
     {
@@ -46,7 +49,8 @@
         ],
         "tags": [
             "clojure",
-            "injection"
+            "injection",
+            "commandinjection"
         ]
     },
     {
@@ -58,7 +62,34 @@
         ],
         "tags": [
             "clojure",
-            "injection"
+            "injection",
+            "commandinjection"
+        ]
+    },
+    {
+        "name": "Elixir Ecto manual sql",
+        "description": "When we assemble sql manually, we are at risk of taking direct user input and including in a query which results in SQL injection",
+        "magic": "Ecto.Adapters.SQL.query!",
+        "exts" : [
+            ".ex"
+        ],
+        "tags": [
+            "elixir",
+            "injection",
+            "sqlinjection"
+        ]
+    },
+    {
+        "name": "Elixir Ecto sql fragment",
+        "description": "When we assemble sql manually or override the ORM, we are at risk of taking direct user input and including in a query which results in SQL injection",
+        "magic": "Ecto.Query.API.fragment",
+        "exts" : [
+            ".ex"
+        ],
+        "tags": [
+            "elixir",
+            "injection",
+            "sqlinjection"
         ]
     }
 ]
