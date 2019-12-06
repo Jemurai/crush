@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -16,12 +18,13 @@ func Timing(start time.Time, message string) time.Time {
 
 // Fingerprint provides a unique string for a given input.
 func Fingerprint(input string) string {
-
-	return input // This works for now ...
-
-	// TODO:  FIGURE out how to make a byte[] from a string
-	// hasher := sha256.New()
-	//	hasher.Write(input)
-	//	hash := hex.EncodeToString(hasher.Sum(nil))
-	// 	return hash
+	var hash string
+	if input != "" {
+		hasher := sha256.New()
+		hasher.Write([]byte(input))
+		hash = hex.EncodeToString(hasher.Sum(nil))
+	} else {
+		hash = input
+	}
+	return hash
 }
