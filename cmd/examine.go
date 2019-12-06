@@ -22,6 +22,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strconv"
 	"sync"
 	"time"
 
@@ -154,7 +155,7 @@ func doCheck(file string, lineno int, check check.Check, line string, options op
 			finding := finding.Finding{
 				Name:        check.Name,
 				Description: check.Description,
-				Detail:      line,
+				Detail:      file,
 				Source:      check.Name,
 				Location:    file,
 				Fingerprint: utils.Fingerprint(check.Name + ":" + file),
@@ -171,8 +172,8 @@ func doCheck(file string, lineno int, check check.Check, line string, options op
 			Description: check.Description,
 			Detail:      line,
 			Source:      check.Name,
-			Location:    file,
-			Fingerprint: utils.Fingerprint(check.Name + file + line),
+			Location:    file + ":" + strconv.Itoa(lineno),
+			Fingerprint: utils.Fingerprint(check.Name + file + strconv.Itoa(lineno) + line),
 		}
 		log.Debugf("Finding: %v", finding)
 		findings = append(findings, finding)
