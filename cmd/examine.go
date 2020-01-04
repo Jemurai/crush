@@ -133,7 +133,9 @@ func processFile(fn string, checks []check.Check, options options.Options) []fin
 	var findings []finding.Finding
 	for i := 0; i < len(lines); i++ {
 		for j := 0; j < len(checks); j++ {
-			if check.AppliesToTag(checks[j], options.Tag) && check.AppliesToExt(checks[j], options.Ext) {
+			if check.AppliesToTag(checks[j], options.Tag) &&
+				check.AppliesToExt(checks[j], filepath.Ext(fn), options.Ext) &&
+				check.AppliesBasedOnThreshold(checks[j], options.Threshold) {
 				fs := doCheck(fn, i, checks[j], lines[i], options)
 				findings = append(findings, fs...)
 			}
@@ -170,7 +172,7 @@ func doCheck(file string, lineno int, check check.Check, line string, options op
 		finding := finding.Finding{
 			Name:        check.Name,
 			Description: check.Description,
-			Detail:      line,
+			Detail:      utils.Truncate(line, 120),
 			Source:      check.Name,
 			Location:    file + ":" + strconv.Itoa(lineno),
 			Fingerprint: utils.Fingerprint(check.Name + file + strconv.Itoa(lineno) + line),
@@ -243,12 +245,14 @@ func buildExamineOptions(cmd *cobra.Command) options.Options {
 	tag := viper.GetString("tag")
 	ext := viper.GetString("ext")
 	compare := viper.GetString("compare")
+	threshold := viper.GetFloat64("threshold")
 
 	options := options.Options{
 		Directory: directory,
 		Tag:       tag,
 		Ext:       ext,
 		Compare:   compare,
+		Threshold: threshold,
 	}
 
 	debug := viper.GetBool("debug")
@@ -276,6 +280,9 @@ func init() {
 
 	examineCmd.PersistentFlags().String("compare", "", "The file to compare new results to.")
 	viper.BindPFlag("compare", examineCmd.PersistentFlags().Lookup("compare"))
+
+	examineCmd.PersistentFlags().Float64("threshold", 5.0, "The threshold of confidence we want to hold findings to.")
+	viper.BindPFlag("threshold", examineCmd.PersistentFlags().Lookup("threshold"))
 
 	log.SetFormatter(&log.TextFormatter{})
 	log.SetLevel(log.DebugLevel)

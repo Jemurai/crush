@@ -3,6 +3,7 @@
     "name": "Sensitive file included (PEM)",
     "description": "Sensitive file included.",
     "magic": ".pem",
+    "threshold": 6.0,
     "exts" : [
         ".pem"
     ],
@@ -14,6 +15,7 @@
     "name": "Sensitive file included (KEY)",
     "description": "Sensitive file included.",
     "magic": ".key",
+    "threshold": 0.5,
     "exts" : [
         ".key"
     ],
@@ -25,6 +27,7 @@
     "name": "Sensitive file included (Cert)",
     "description": "Sensitive file included.",
     "magic": ".cert",
+    "threshold": 6.0,
     "exts" : [
         ".cert"
     ],
@@ -36,6 +39,7 @@
     "name": "Sensitive file included (crt)",
     "description": "Sensitive file included.",
     "magic": ".crt",
+    "threshold": 6.0,
     "exts" : [
         ".crt"
     ],
@@ -47,6 +51,7 @@
     "name": "Sensitive file included (p12)",
     "description": "Sensitive file included.",
     "magic": ".p12",
+    "threshold": 6.0,
     "exts" : [
         ".p12"
     ],
@@ -58,6 +63,7 @@
     "name": "Sensitive file included (keystore)",
     "description": "Sensitive file included.",
     "magic": ".keystore",
+    "threshold": 6.0,
     "exts" : [
         ".keystore"
     ],
@@ -69,6 +75,7 @@
     "name": "Sensitive file included (id_rsa)",
     "description": "Sensitive file included.",
     "magic": "id_rsa",
+    "threshold": 6.0,
     "exts" : [
         "id_rsa"
     ],

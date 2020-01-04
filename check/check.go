@@ -8,6 +8,7 @@ type Check struct {
 	Extensions  []string `json:"exts"`
 	Tags        []string `json:"tags"`
 	Ran         bool     `json:"ran"`
+	Threshold   float64  `json:"threshold"`
 }
 
 // CountHowManyRan - given an array of checks, how many ran.
@@ -35,16 +36,37 @@ func AppliesToTag(check Check, tag string) bool {
 	return false
 }
 
-// AppliesToExt checks that the extension provided should
-// be checked.  (Eg. .java)
-func AppliesToExt(check Check, ext string) bool {
-	if ext == "" {
-		return true
+// AppliesToExt checks that the extension provided should be checked.
+// For example does it apply to .java.
+//
+// There are two dimensions for this:
+// 1.  Does the check apply to the extension of the actual file: actualExt
+// 2.  Did the user specify they wanted to only run checks on certain extensions
+func AppliesToExt(check Check, actualExt string, extOption string) bool {
+	var applies bool
+	if extOption == "" {
+		applies = checkExtensions(check.Extensions, actualExt)
+	} else {
+		applies = checkExtensions(check.Extensions, extOption) && checkExtensions(check.Extensions, actualExt)
 	}
-	for i := 0; i < len(check.Extensions); i++ {
-		if check.Extensions[i] == ext {
+	return applies
+}
+
+func checkExtensions(extensions []string, extension string) bool {
+	for i := 0; i < len(extensions); i++ {
+		if extensions[i] == extension {
 			return true
 		}
 	}
 	return false
+}
+
+// AppliesBasedOnThreshold checks that the check applies based on confidence
+// selection
+func AppliesBasedOnThreshold(check Check, threshold float64) bool {
+	if check.Threshold >= threshold {
+		return true
+	} else {
+		return false
+	}
 }

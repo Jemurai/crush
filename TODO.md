@@ -1,11 +1,27 @@
-# TODO Items for crh
+# TODO Items for crush
 
-x- Add all the checks
-x- Add json checker
-- Add report output
-x- Add a json output
-- Add a "compare to previous and only show new"
 
 ```sh
 mk@om crush % go run main.go examine --directory /Users/mk/area54/service --tag injection --ext .clj
 ```
+
+
+mk@om crush % go run main.go examine --directory /Users/mk/area54/service --tag clojure > ./testing-clojure.json                
+
+Fix stuff...
+
+mk@om crush % go run main.go examine --directory /Users/mk/area54/service --tag clojure --compare ./testing-clojure.json
+
+mk@om crush % ./build.sh github.com/jemurai/crush
+
+## Checks To Implement
+
+- MD5
+- SHA-1
+- Argon
+- AES
+- Bcrypt
+
+- Redis_pass
+
+- jdbc/query + (str

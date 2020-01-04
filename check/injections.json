@@ -3,6 +3,7 @@
         "name": "Java runtime exec",
         "description": "Java Runtime.exec is dangerous because it executes arbitrary code",
         "magic": "Runtime.exec",
+        "threshold": 9.0,
         "exts" : [
             ".java"
         ],
@@ -16,6 +17,7 @@
         "name": "JavaScript evaluation",
         "description": "JavaScript eval is dangerous because it executes arbitrary code",
         "magic": " eval",
+        "threshold": 0.5,
         "exts" : [
             ".js",
             ".ts"
@@ -31,6 +33,7 @@
         "name": "Ruby command evalutation",
         "description": "Ruby shell exec is dangerous because it executes arbitrary code",
         "magic": "shell_exec",
+        "threshold": 8.0,
         "exts" : [
             ".rb"
         ],
@@ -44,6 +47,7 @@
         "name": "clojure read-string",
         "description": "clojure read-string is dangerous",
         "magic": "read-string",
+        "threshold": 8.0,
         "exts" : [
             ".clj"
         ],
@@ -57,6 +61,7 @@
         "name": "clojure shell",
         "description": "clojure shell can be dangerous",
         "magic": "clojure.java.shell",
+        "threshold": 8.0,
         "exts" : [
             ".clj"
         ],
@@ -70,6 +75,7 @@
         "name": "Elixir Ecto manual sql",
         "description": "When we assemble sql manually, we are at risk of taking direct user input and including in a query which results in SQL injection",
         "magic": "Ecto.Adapters.SQL.query!",
+        "threshold": 6.0,
         "exts" : [
             ".ex"
         ],
@@ -83,6 +89,7 @@
         "name": "Elixir Ecto sql fragment",
         "description": "When we assemble sql manually or override the ORM, we are at risk of taking direct user input and including in a query which results in SQL injection",
         "magic": "Ecto.Query.API.fragment",
+        "threshold": 6.0,
         "exts" : [
             ".ex"
         ],

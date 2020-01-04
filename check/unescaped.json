@@ -3,6 +3,7 @@
         "name": "Ruby HTML Safe Usage",
         "description": "Rails uses HTML Safe to mark strings that are safe for HTML.",
         "magic": "html_safe",
+        "threshold": 6.0,
         "exts" : [
             ".rb",
             ".erb"
@@ -15,6 +16,7 @@
         "name": "Unsafe Thymeleaf String Escaping",
         "description": "Spring Thymeleaf (templating) does not output encode tags with utext",
         "magic": "utext",
+        "threshold": 7.0,
         "exts" : [
             ".java",
             ".jsp"
@@ -28,6 +30,7 @@
         "name": "Unsafe Mustache Escaping",
         "description": "Mustache does not output encode data with triple braces",
         "magic": "{{{",
+        "threshold": 6.0,
         "exts" : [
             ".js"
         ],

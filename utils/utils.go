@@ -28,3 +28,15 @@ func Fingerprint(input string) string {
 	}
 	return hash
 }
+
+// Truncate ensures the sizes of strings are under control
+func Truncate(input string, size int) string {
+	result := input
+	if len(input) > size {
+		if size > 3 {
+			size -= 3
+		}
+		result = input[0:size] + "..."
+	}
+	return result
+}
