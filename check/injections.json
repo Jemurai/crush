@@ -75,7 +75,7 @@
         "name": "Elixir Ecto manual sql",
         "description": "When we assemble sql manually, we are at risk of taking direct user input and including in a query which results in SQL injection",
         "magic": "Ecto.Adapters.SQL.query!",
-        "threshold": 6.0,
+        "threshold": 2.0,
         "exts" : [
             ".ex"
         ],
@@ -89,7 +89,7 @@
         "name": "Elixir Ecto sql fragment",
         "description": "When we assemble sql manually or override the ORM, we are at risk of taking direct user input and including in a query which results in SQL injection",
         "magic": "Ecto.Query.API.fragment",
-        "threshold": 6.0,
+        "threshold": 2.0,
         "exts" : [
             ".ex"
         ],
