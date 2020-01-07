@@ -135,7 +135,8 @@ func processFile(fn string, checks []check.Check, options options.Options) []fin
 		for j := 0; j < len(checks); j++ {
 			if check.AppliesToTag(checks[j], options.Tag) &&
 				check.AppliesToExt(checks[j], filepath.Ext(fn), options.Ext) &&
-				check.AppliesBasedOnThreshold(checks[j], options.Threshold) {
+				check.AppliesBasedOnThreshold(checks[j], options.Threshold) &&
+				check.AppliesBasedOnComment(lines[i], filepath.Ext(fn)) {
 				fs := doCheck(fn, i, checks[j], lines[i], options)
 				findings = append(findings, fs...)
 			}

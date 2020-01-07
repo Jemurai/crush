@@ -111,5 +111,57 @@
             "elixir",
             "injection"
         ]
+    },
+    {
+        "name": "Ruby System Command: system",
+        "description": "When we run commands on the OS, we need to make sure they don't contain user input or run unintended commands.",
+        "magic": "system",
+        "threshold": 8.0,
+        "exts" : [
+            ".rb"
+        ],
+        "tags": [
+            "ruby",
+            "injection"
+        ]
+    },
+    {
+        "name": "Ruby System Command: popen",
+        "description": "When we run commands on the OS, we need to make sure they don't contain user input or run unintended commands.",
+        "magic": "popen",
+        "threshold": 8.0,
+        "exts" : [
+            ".rb"
+        ],
+        "tags": [
+            "ruby",
+            "injection"
+        ]
+    },
+    {
+        "name": "Ruby System Command: exec",
+        "description": "When we run commands on the OS, we need to make sure they don't contain user input or run unintended commands.",
+        "magic": "exec",
+        "threshold": 8.0,
+        "exts" : [
+            ".rb"
+        ],
+        "tags": [
+            "ruby",
+            "injection"
+        ]
+    },
+    {
+        "name": "Ruby System Command: tick",
+        "description": "When we run commands on the OS, we need to make sure they don't contain user input or run unintended commands.",
+        "magic": "`",
+        "threshold": 8.0,
+        "exts" : [
+            ".rb"
+        ],
+        "tags": [
+            "ruby",
+            "injection"
+        ]
     }
 ]

@@ -1,5 +1,10 @@
 package check
 
+import (
+	"regexp"
+	"strings"
+)
+
 // Check is a security check.
 type Check struct {
 	Name        string   `json:"name"`
@@ -66,7 +71,32 @@ func checkExtensions(extensions []string, extension string) bool {
 func AppliesBasedOnThreshold(check Check, threshold float64) bool {
 	if check.Threshold >= threshold {
 		return true
-	} else {
+	}
+	return false
+}
+
+// AppliesBasedOnComment tries to ignore common comment formats
+// to avoid false positives where issues are in comments.
+func AppliesBasedOnComment(line string, ext string) bool {
+	trimmed := strings.TrimSpace(line)
+	if ext == ".rb" &&
+		checkMatch(trimmed, "^#") {
+		return false
+	} else if ext == ".js" &&
+		checkMatch(trimmed, "^//") {
+		return false
+	} else if ext == ".clj" &&
+		checkMatch(trimmed, "^;") {
+		return false
+	} else if ext == ".ex" &&
+		checkMatch(trimmed, "^#") {
 		return false
 	}
+	return true
+}
+
+func checkMatch(line string, comment string) bool {
+	r, _ := regexp.Compile(comment)
+	matched := r.MatchString(line)
+	return matched
 }
