@@ -172,7 +172,7 @@ func doCheck(file string, lineno int, check check.Check, line string, options op
 		finding := finding.Finding{
 			Name:        check.Name,
 			Description: check.Description,
-			Detail:      utils.Truncate(line, 120),
+			Detail:      utils.Truncate(line, 320),
 			Source:      check.Name,
 			Location:    file + ":" + strconv.Itoa(lineno),
 			Fingerprint: utils.Fingerprint(check.Name + file + strconv.Itoa(lineno) + line),

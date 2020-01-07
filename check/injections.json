@@ -98,5 +98,18 @@
             "injection",
             "sqlinjection"
         ]
+    },
+    {
+        "name": "Elixir System Command",
+        "description": "When we run commands on the OS, we need to make sure they don't contain user input or run unintended commands.",
+        "magic": "System.cmd",
+        "threshold": 8.0,
+        "exts" : [
+            ".ex"
+        ],
+        "tags": [
+            "elixir",
+            "injection"
+        ]
     }
 ]
