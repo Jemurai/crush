@@ -14,6 +14,8 @@ mk@om crush % go run main.go examine --directory /Users/mk/area54/service --tag 
 
 mk@om crush % ./build.sh github.com/jemurai/crush
 
+go run main.go examine --debug true  --directory /Users/mk/area51/jasp/jasp-api --threshold 6.0
+
 ## Checks To Implement
 
 - MD5
