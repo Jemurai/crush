@@ -41,9 +41,9 @@ integrating with `fkit` to get the results where you want them.
 
 ## Local Installation and Use
 
-Get your source code:
+Get your source code by either:
 
-`git clone https://github.com/jemurai/crush`
+`git clone https://github.com/jemurai/crush` or `go get github.com/jemurai/crush`.
 
 Make changes.  Run locally without building.
 
@@ -70,3 +70,12 @@ This should be as simple as:
 Crush provides some advanced options (tags, extensions and threshold) as configurable knobs 
 you can turn to try to ensure that you get the results you want.
 
+Additional documentation will added here.
+
+## Issues and Roadmap 
+
+Are tracked in [GitHub Issues](https://github.com/jemurai/crush/issues/).
+
+## License
+
+Crush is open source and licenced under an Apache license.

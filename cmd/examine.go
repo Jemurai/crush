@@ -1,4 +1,4 @@
-// Copyright © 2019 Matt Konda <mkonda@jemurai.com>
+// Copyright © 2019-2020 Matt Konda <mkonda@jemurai.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ import (
 	"github.com/jemurai/crush/options"
 	"github.com/jemurai/crush/utils"
 
-	fkitread "github.com/jemurai/fkit/cmd"
 	"github.com/jemurai/fkit/finding"
+	fkitutils "github.com/jemurai/fkit/utils"
 
 	log "github.com/sirupsen/logrus"
 
@@ -66,7 +66,7 @@ Behind the scenes, crh checks a variety of things.`,
 		wg.Wait()
 
 		if opts.Compare != "" {
-			added := doCompare(opts.Compare, findings)
+			added := fkitutils.CompareFileAndArray(opts.Compare, findings)
 			printFindings(added, checks, files) // only printing new added findings
 		} else {
 			printFindings(findings, checks, files)
@@ -84,44 +84,6 @@ func printFindings(findings []finding.Finding, checks []check.Check, files []str
 	} else {
 		fmt.Print("[]")
 	}
-}
-
-func doCompare(file string, findings []finding.Finding) []finding.Finding {
-	log.Debugf("Doing compare with %s and %v findings", file, len(findings))
-	oldFindings := fkitread.BuildFindingsFromFile(file)
-	log.Debugf("Old findings: count %v", len(oldFindings))
-
-	var added []finding.Finding
-	var fixed []finding.Finding
-	found := false
-
-	// Do diff. Start with fixed.
-	for i := 0; i < len(oldFindings); i++ {
-		found = false
-		for j := 0; j < len(findings); j++ {
-			if oldFindings[i].Fingerprint == findings[j].Fingerprint {
-				found = true
-			}
-		}
-		if !found {
-			fixed = append(fixed, oldFindings[i])
-		}
-	}
-
-	// Now look for new
-	for i := 0; i < len(findings); i++ {
-		found = false
-		for j := 0; j < len(oldFindings); j++ {
-			if findings[i].Fingerprint == oldFindings[j].Fingerprint {
-				found = true
-			}
-		}
-		if !found {
-			added = append(added, findings[i])
-		}
-	}
-	log.Debugf("\n\nSummary:\n\tIssues Fixed: %v\n\tNew Issues: %v", len(fixed), len(added))
-	return added
 }
 
 func processFile(fn string, checks []check.Check, options options.Options) []finding.Finding {
