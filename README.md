@@ -67,10 +67,19 @@ This should be as simple as:
 
 ## Advanced Usage
 
-Crush provides some advanced options (tags, extensions and threshold) as configurable knobs 
-you can turn to try to ensure that you get the results you want.
+Crush provides some advanced options (tags, extensions and 
+threshold) as configurable knobs you can turn to try to ensure 
+that you get the results you want.
 
 Additional documentation will added here.
+
+### Compare
+
+```sh
+crush examine --compare <file of old findings> --directory /path/to/code
+```
+
+This will produce JSON for added new findings in the current source (what is found in the directory).
 
 ## Issues and Roadmap 
 
