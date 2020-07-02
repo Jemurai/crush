@@ -1,0 +1,295 @@
+[
+    {
+        "name": "Appear to be writing data that is world readable.",
+        "description": "Appear to be writing data that is world readable.",
+        "magic": "MODE_WORLD_READABLE",
+        "threshold": 2.0,
+        "exts" : [
+            ".java",
+            ".kt"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
+        "name": "Review use of NSUserDefaults",
+        "description": "Review use of NSUserDefaults which is not appropriate for sensitive information",
+        "magic": "NSUserDefaults",
+        "threshold": 1.0,
+        "exts" : [
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of Android Camera permission",
+        "description": "Review use of Camera permission which is not appropriate for many applications",
+        "magic": "android.permission.CAMERA",
+        "threshold": 3.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android"
+        ]
+    },{
+        "name": "Review use of Android external storage permission",
+        "description": "Review use of external storage permission which is not appropriate for many applications",
+        "magic": "android.permission.WRITE_EXTERNAL_STORAGE",
+        "threshold": 3.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
+        "name": "Review use of Android audio recording permission",
+        "description": "Review use of audito recording permission which is not appropriate for many applications",
+        "magic": "android.permission.RECORD_AUDIO",
+        "threshold": 3.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
+        "name": "Review use of loadHTMLString",
+        "description": "Review use of loadHTMLString which can introduce XSS and malicious code",
+        "magic": "loadHTMLString",
+        "threshold": 1.0,
+        "exts" : [
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of Android HttpClient to ensure proper SSL",
+        "description": "Review use of Android HttpClient to ensure proper SSL",
+        "magic": "HttpClient",
+        "threshold": 1.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
+        "name": "Review use of Android android:allowBackup",
+        "description": "Should backups be enabled?",
+        "magic": "android:allowBackup",
+        "threshold": 1.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
+        "name": "Review use of Android android:debuggable",
+        "description": "Should debugging be enabled?",
+        "magic": "android:debuggable",
+        "threshold": 1.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
+        "name": "Review use of NSUrlConnection for proper SSL",
+        "description": "Review use of NSUrlConnection for proper SSL",
+        "magic": "NSUrlConnection",
+        "threshold": 1.0,
+        "exts" : [
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.DataProtection for proper use of local secure data",
+        "description": "Review use of com.apple.DataProtection for proper use of local secure data",
+        "magic": "com.apple.DataProtection",
+        "threshold": 1.0,
+        "exts" : [
+            ".pbxproj"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.Keychain for proper use of local secure storage",
+        "description": "Review use of com.apple.Keychain for proper use of local secure data",
+        "magic": "com.apple.Keychain",
+        "threshold": 1.0,
+        "exts" : [
+            ".pbxproj"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.SafariKeychain for proper use",
+        "description": "Review use of com.apple.SafariKeychain for proper use",
+        "magic": "com.apple.SafariKeychain",
+        "threshold": 1.0,
+        "exts" : [
+            ".pbxproj"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of NSFileProtectionNone for proper use",
+        "description": "Review use of NSFileProtectionNone for proper use",
+        "magic": "NSFileProtectionNone",
+        "threshold": 1.0,
+        "exts" : [
+            ".entitlements",
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.developer.default-data-protection for proper use",
+        "description": "Review use of com.apple.developer.default-data-protection for proper use (Want: NSFileProtectionComplete or similar)",
+        "magic": "com.apple.developer.default-data-protection",
+        "threshold": 1.0,
+        "exts" : [
+            ".entitlements",
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.security.app-sandbox for proper use",
+        "description": "Review use of com.apple.security.app-sandbox for proper use (Want true)",
+        "magic": "com.apple.security.app-sandbox",
+        "threshold": 1.0,
+        "exts" : [
+            ".entitlements",
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.security.device.audio-input for proper use",
+        "description": "Review use of com.apple.security.device.audio-input for proper use",
+        "magic": "com.apple.security.device.audio-input",
+        "threshold": 1.0,
+        "exts" : [
+            ".entitlements",
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.security.device.camera for proper use",
+        "description": "Review use of com.apple.security.device.camera for proper use",
+        "magic": "com.apple.security.device.camera",
+        "threshold": 1.0,
+        "exts" : [
+            ".entitlements",
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.security.personal-information.location for proper use",
+        "description": "Review use of com.apple.security.personal-information.location for proper use",
+        "magic": "com.apple.security.personal-information.location",
+        "threshold": 1.0,
+        "exts" : [
+            ".entitlements",
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    },{
+        "name": "Review use of com.apple.security.personal-information.photos-library for proper use",
+        "description": "Review use of com.apple.security.personal-information.photos-library for proper use",
+        "magic": "com.apple.security.personal-information.photos-library",
+        "threshold": 1.0,
+        "exts" : [
+            ".entitlements",
+            ".swift",
+            ".m",
+            ".h"
+        ],
+        "tags": [
+            "mobile",
+            "ios"
+        ]
+    }
+]
