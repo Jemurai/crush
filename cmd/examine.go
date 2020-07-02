@@ -153,6 +153,7 @@ func getAllChecks(opts options.Options) []check.Check {
 	checks = append(checks, getChecks("check/secrets.json")...)
 	checks = append(checks, getChecks("check/files.json")...)
 	checks = append(checks, getChecks("check/unescaped.json")...)
+	checks = append(checks, getChecks("check/mobile.json")...)
 	return checks
 }
 
