@@ -137,6 +137,54 @@
             "kt"
         ]
     },{
+        "name": "Review use of Android android:usesCleartextTraffic=true",
+        "description": "Should clear text traffice be enabled?",
+        "magic": "android:usesCleartextTraffic=\"true\"",
+        "threshold": 3.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
+        "name": "Review use of Android android:requestLegacyExternalStorage=true",
+        "description": "Should legacy external storage be supported?",
+        "magic": "android:requestLegacyExternalStorage=\"true\"",
+        "threshold": 3.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
+        "name": "Review use of Android android:persistent",
+        "description": "Should the application be persistent?  Usually this is only the case for system processes.",
+        "magic": "android:persistent",
+        "threshold": 3.0,
+        "exts" : [
+            ".java",
+            ".kt",
+            ".xml"
+        ],
+        "tags": [
+            "mobile",
+            "android",
+            "java",
+            "kt"
+        ]
+    },{
         "name": "Review use of NSUrlConnection for proper SSL",
         "description": "Review use of NSUrlConnection for proper SSL",
         "magic": "NSUrlConnection",
