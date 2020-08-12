@@ -11,4 +11,4 @@ FROM scratch
 COPY --from=builder /build/ /app/
 WORKDIR /app
 ENTRYPOINT [ "/app/crush", "examine", "--directory" ]
-CMD ["/tmp/toanalyze" ]
+CMD ["." ]
