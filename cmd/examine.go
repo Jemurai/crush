@@ -87,7 +87,7 @@ func printFindings(findings []finding.Finding, checks []check.Check, files []str
 }
 
 func processFile(fn string, checks []check.Check, options options.Options) []finding.Finding {
-	// log.Debugf("Processing %s", fn)
+	log.Debugf("Processing %s", fn)
 	lines, err := readLines(fn)
 	if err != nil {
 		log.Errorf("Error reading file %s", fn)
