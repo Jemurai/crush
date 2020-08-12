@@ -149,11 +149,11 @@ func doCheck(file string, lineno int, check check.Check, line string, options op
 
 func getAllChecks(opts options.Options) []check.Check {
 	var checks []check.Check
-	checks = append(checks, getChecks("/app/check/injections.json")...)
-	checks = append(checks, getChecks("/app/check/secrets.json")...)
-	checks = append(checks, getChecks("/app/check/files.json")...)
-	checks = append(checks, getChecks("/app/check/unescaped.json")...)
-	checks = append(checks, getChecks("/app/check/mobile.json")...)
+	checks = append(checks, getChecks("check/injections.json")...)
+	checks = append(checks, getChecks("check/secrets.json")...)
+	checks = append(checks, getChecks("check/files.json")...)
+	checks = append(checks, getChecks("check/unescaped.json")...)
+	checks = append(checks, getChecks("check/mobile.json")...)
 	return checks
 }
 
