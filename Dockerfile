@@ -10,5 +10,5 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflag
 FROM scratch
 COPY --from=builder /build/ /app/
 WORKDIR /app
-ENTRYPOINT "crush"
-CMD "examine --directory ."
+ENTRYPOINT ["/app/crush"]
+CMD []
