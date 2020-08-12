@@ -5,10 +5,10 @@ WORKDIR /build
 RUN apk add git
 COPY ./go.mod ./go.sum ./
 RUN go mod download 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o crush .
 
 FROM scratch
 COPY --from=builder /build/ /app/
 WORKDIR /app
-ENTRYPOINT [ "./main" ]
-CMD []
+ENTRYPOINT [ "/app/crush", "examine", "--directory" ]
+CMD ["/tmp/toanalyze" ]

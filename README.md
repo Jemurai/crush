@@ -65,6 +65,10 @@ This should be as simple as:
 
 `docker build .` or `docker build -t jemurai/crush:0.1 . -f Dockerfile`
 
+To build and push the docker image to dockerhub:
+`docker built -t jemurai/crush:0.v .`
+`docker push`
+
 ## Advanced Usage
 
 Crush provides some advanced options (tags, extensions and 

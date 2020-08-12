@@ -1,0 +1,10 @@
+name: 'Jemurai Crush'
+description: 'Crush code - automate code review'
+branding:
+  icon: 'code'
+  color: 'red'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - $GITHUB_WORKSPACE
