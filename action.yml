@@ -3,6 +3,11 @@ description: 'Crush code - automate code review'
 branding:
   icon: 'code'
   color: 'red'
+inputs:
+  dir: 
+    description: 'The directory to scan'
+    required: true
+    default: '.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
