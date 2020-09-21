@@ -38,5 +38,47 @@
             "javascript",
             "xss"
         ]
+    },{
+        "name": "Angular bypassing default output encoding",
+        "description": "Angular performs output encoding by default to prevent xss but this method bypasses that encoding",
+        "magic": "bypassSecurityTrust",
+        "threshold": 6.0,
+        "exts" : [
+            ".js",
+            ".ts",
+            ".html"
+        ],
+        "tags": [
+            "javascript",
+            "xss"
+        ]
+    },{
+        "name": "Angular bypassing default output encoding",
+        "description": "Angular performs output encoding when doing concatenation, but not binding to prevent xss",
+        "magic": "[innerHTML]",
+        "threshold": 6.0,
+        "exts" : [
+            ".js",
+            ".ts",
+            ".html"
+        ],
+        "tags": [
+            "javascript",
+            "xss"
+        ]
+    },{
+        "name": "React bypassing default output encoding",
+        "description": "React performs output encoding by default to prevent XSS.  This bypasses the default output encoding",
+        "magic": "dangerouslySet",
+        "threshold": 6.0,
+        "exts" : [
+            ".js",
+            ".ts",
+            ".html"
+        ],
+        "tags": [
+            "javascript",
+            "xss"
+        ]
     }
 ]
