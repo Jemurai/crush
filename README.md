@@ -10,17 +10,35 @@ Download the appropriate executable from the [releases](https://github.com/Jemur
 
 Alternatively `docker pull jemurai/crush`.
 
+Or use the GitHub Action.
+
 ## Basic Usage
 
 The most basic use will run the tool on a directory of code.
 
 `crush examine --directory /your/code/here`
 
+Generally you might want to specify extensions, tags or thresholds.  These help you to run the checks you really want or care about.  As you can imagine, just searching for certain strings can get noisy and some tuning can go a long way.
+
+So you can specify: 
+
+1. Threshold: `--threshold 2` - this tells Crush only to check the things that have a higher threshold than specified.  The default is 5.  You can see the values on the checks in the JSON files.
+
+1. Tag:  `--tag badwords` - this tells crush to run the checks that have this tag.  Some checks are tagged with language or issue types.  The `badwords` tag is taken directly from [this blog post](https://btlr.dev/blog/how-to-find-vulnerabilities-in-code-bad-words) by Will Butler.
+
+1. Extension: `--ext .java` - this tells crush just to run the checks that apply to .java files.
+
 ## Docker Usage
 
 To run the docker image against a local directory, just do this: 
 
-`docker run -v <local-directory>:/tmp/toanalyze jemurai/crush:lastest examine --directory /tmp/toanalyze`
+`docker run -v <local-directory>:/tmp/toanalyze jemurai/crush:v examine --directory /tmp/toanalyze`
+
+Of course, you can also run this with the above tags and thresholds:
+
+`docker run -v <localdir>:/tmp/target jemurai/crush:v examine --directory /tmp/target --tag badwords --threshold 1 --debug true`
+
+This will generate a lot of output.
 
 ## Setting Expectations
 
@@ -28,6 +46,27 @@ We do a fair amount of code review.  As we do that, some things present
 that are worthy of review pretty much whenever we see them.  They are
 _candidate_ issues.  The certainty for any given item may be low, but we
 put them into this tool because we want to review them.
+
+## Check Anatomy
+
+You can find the checks in `/checks/*.json`.  They look like this: 
+
+```json
+[{
+        "name": "Raw handling of something",
+        "description": "Raw handling something where security might be applied at a higher abstraction",
+        "magic": "(?i)raw",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    }
+]
+```
+
+You can see here how the tags, extensions and threshold are set for each check, which is essentially a Golang Regex in the "magic" field.
 
 ## Pairing with FKIT
 
@@ -47,7 +86,7 @@ Get your source code by either:
 
 Make changes.  Run locally without building.
 
-`go run main.go examine --directory /your/code/here`
+`go run crush.go examine --directory /your/code/here`
 
 ## Building Cross Platforms
 
@@ -63,11 +102,11 @@ build.sh github.com/jemurai/crush
 
 This should be as simple as: 
 
-`docker build .` or `docker build -t jemurai/crush:0.1 . -f Dockerfile`
+`docker build .` or `docker build -t jemurai/crush:v . -f Dockerfile`
 
 To build and push the docker image to dockerhub:
-`docker built -t jemurai/crush:0.v .`
-`docker push`
+`docker build -t jemurai/crush:v .`
+`docker push jemurai/crush:v`
 
 ## Advanced Usage
 

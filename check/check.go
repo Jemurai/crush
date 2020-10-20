@@ -58,6 +58,9 @@ func AppliesToExt(check Check, actualExt string, extOption string) bool {
 }
 
 func checkExtensions(extensions []string, extension string) bool {
+	if len(extensions) == 0 {
+		return true
+	}
 	for i := 0; i < len(extensions); i++ {
 		if extensions[i] == extension {
 			return true

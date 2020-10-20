@@ -111,6 +111,8 @@ func processFile(fn string, checks []check.Check, options options.Options) []fin
 func doCheck(file string, lineno int, check check.Check, line string, options options.Options) []finding.Finding {
 	var findings []finding.Finding
 
+	// log.Debugf("Running check: %v on file %v", check.Name, file)
+
 	check.Ran = true // TODO: Figure out how to track this.
 
 	r, _ := regexp.Compile(check.Magic)
@@ -149,16 +151,25 @@ func doCheck(file string, lineno int, check check.Check, line string, options op
 
 func getAllChecks(opts options.Options) []check.Check {
 	var checks []check.Check
-	checks = append(checks, getChecks("/app/check/injections.json")...)
-	checks = append(checks, getChecks("/app/check/secrets.json")...)
-	checks = append(checks, getChecks("/app/check/files.json")...)
-	checks = append(checks, getChecks("/app/check/unescaped.json")...)
-	checks = append(checks, getChecks("/app/check/mobile.json")...)
+	checks = append(checks, getChecks("check/injections.json")...)
+	checks = append(checks, getChecks("check/secrets.json")...)
+	checks = append(checks, getChecks("check/files.json")...)
+	checks = append(checks, getChecks("check/unescaped.json")...)
+	checks = append(checks, getChecks("check/mobile.json")...)
+	checks = append(checks, getChecks("check/badwords.json")...)
 	return checks
 }
 
 func getChecks(file string) []check.Check {
 	var checks []check.Check
+
+	// In regular file system, is at check/<name>.json.
+	// In Docker, is at:  /app/check/<name>.json
+	_, err := os.Stat(file)
+	if os.IsNotExist(err) {
+		file = "/app/" + file
+	}
+	log.Debugf("Getting checks for: %v", file)
 	rfile, err := os.Open(file)
 	if err != nil {
 		log.Error(err)

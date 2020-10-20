@@ -1,0 +1,706 @@
+[
+    {
+        "name": "Raw handling of something",
+        "description": "Raw handling something where security might be applied at a higher abstraction",
+        "magic": "(?i)raw",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Eval",
+        "description": "Eval could result in dynamic running of files",
+        "magic": "(?i)eval",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Exec",
+        "description": "Exec could result in data running as code.",
+        "magic": "(?i)exec",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Run",
+        "description": "Run could mean that you want to run something in a context that should be examined",
+        "magic": "(?i)run",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Process",
+        "description": "Process could mean that you want to run something in a context that should be examined",
+        "magic": "(?i)process",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "System",
+        "description": "System could mean that you want to run something in a context that should be examined",
+        "magic": "(?i)system",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "popen",
+        "description": "popen could mean that you want to run something in a context that should be examined",
+        "magic": "(?i)popen",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "spawn",
+        "description": "spawn could mean that you want to run something in a context that should be examined",
+        "magic": "(?i)spawn",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "privilege",
+        "description": "Privilege typically alludes to some sort of authorization or roles and should be reviewed.",
+        "magic": "(?i)privilege",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "permission",
+        "description": "Permission typically alludes to some sort of authorization or roles and should be reviewed.",
+        "magic": "(?i)permission",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "capability",
+        "description": "Capability typically alludes to some sort of authorization or roles and should be reviewed.",
+        "magic": "(?i)capability",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "role",
+        "description": "Role typically alludes to some sort of authorization or roles and should be reviewed.",
+        "magic": "(?i)role",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "rbac",
+        "description": "RBAC (Role based access control) typically alludes to some sort of authorization or roles and should be reviewed.",
+        "magic": "(?i)rbac",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "policy",
+        "description": "Policy typically alludes to some sort of authorization or roles and should be reviewed.",
+        "magic": "(?i)policy",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "authorization",
+        "description": "Authorization typically alludes to some sort of authorization or roles and should be reviewed.",
+        "magic": "(?i)authorization",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "claims",
+        "description": "Claims typically alludes to some sort of authorization or roles and should be reviewed.",
+        "magic": "(?i)claims",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "reflect",
+        "description": "Reflect is typically used for reflection and can be weak points and should be reviewed.",
+        "magic": "(?i)reflect",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "klass",
+        "description": "klass is typically used for reflection and can be weak points and should be reviewed.",
+        "magic": "(?i)klass",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "constantize",
+        "description": "Constantize is typically used for reflection and can be weak points and should be reviewed.",
+        "magic": "(?i)constantize",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "forName",
+        "description": "forName is typically used for reflection and can be weak points and should be reviewed.",
+        "magic": "(?i)forName",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "pickle",
+        "description": "pickle is a serialization mechanism and could indicate that serialization / deserialization should be reviewed.",
+        "magic": "(?i)pickle",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "yaml",
+        "description": "yaml is a serialization mechanism and could indicate that serialization / deserialization should be reviewed.",
+        "magic": "(?i)yaml",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "serialize",
+        "description": "serialize is a serialization mechanism and could indicate that serialization / deserialization should be reviewed.",
+        "magic": "(?i)serialize",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "marshal",
+        "description": "marshal is a serialization mechanism and could indicate that serialization / deserialization should be reviewed.",
+        "magic": "(?i)marshal",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "objectinput",
+        "description": "objectinput is a serialization mechanism and could indicate that serialization / deserialization should be reviewed.",
+        "magic": "(?i)objectinput",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "parse",
+        "description": "parse is a likely target for fiddling and should be reviewed.",
+        "magic": "(?i)parse",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "open",
+        "description": "open is a likely target for fiddling and should be reviewed.",
+        "magic": "(?i)oopen",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "request",
+        "description": "request is a likely target for fiddling and should be reviewed.",
+        "magic": "(?i)request",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "unsafe",
+        "description": "unsafe is often used when developers know something is risky and should be reviewed.",
+        "magic": "(?i)unsafe",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "insecure",
+        "description": "insecure is often used when developers know something is risky and should be reviewed.",
+        "magic": "(?i)insecure",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "dangerous",
+        "description": "dangerous is often used when developers know something is risky and should be reviewed.",
+        "magic": "(?i)dangerous",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "todo",
+        "description": "todo can be an indication that there is a known issue and should be reviewed.",
+        "magic": "(?i)todo",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "fixme",
+        "description": "fixme can be an indication that there is a known issue and should be reviewed.",
+        "magic": "(?i)fixme",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "xxx",
+        "description": "xxx can be an indication that there is a known issue and should be reviewed.",
+        "magic": "(?i)xxx",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "merge",
+        "description": "merge can be an indication that may be objects merged creating mass assignment or prototype pollution types of vulns and should be reviewed.",
+        "magic": "(?i)merge",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "clone",
+        "description": "clone can be an indication that may be objects merged creating mass assignment or prototype pollution types of vulns and should be reviewed.",
+        "magic": "(?i)clone",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "alloc",
+        "description": "alloc can be an indication that manual memory management is used and should be reviewed.",
+        "magic": "(?i)alloc",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "free",
+        "description": "free can be an indication that manual memory management is used and should be reviewed.",
+        "magic": "(?i)free",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "AES",
+        "description": "AES - cryptography should be reviewed.",
+        "magic": "(?i)aes",
+        "threshold": 3.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "RSA",
+        "description": "RSA - cryptography should be reviewed.",
+        "magic": "(?i)rsa",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "DSA",
+        "description": "DSA - cryptography should be reviewed.",
+        "magic": "(?i)dsa",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "DES",
+        "description": "DES - cryptography should be reviewed.",
+        "magic": "(?i)des",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "CBC",
+        "description": "CBC - cryptography should be reviewed.",
+        "magic": "(?i)cbc",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "ECB",
+        "description": "ECB - cryptography should be reviewed.",
+        "magic": "(?i)ecb",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "HMAC",
+        "description": "HMAC - cryptography should be reviewed.",
+        "magic": "(?i)hmac",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "GCM",
+        "description": "GCM - cryptography should be reviewed.",
+        "magic": "(?i)gcm",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "JWT",
+        "description": "JWT - cryptography should be reviewed.",
+        "magic": "(?i)jwt",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "JKS",
+        "description": "JKS - cryptography should be reviewed.",
+        "magic": "(?i)jks",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "JWK",
+        "description": "JWK - cryptography should be reviewed.",
+        "magic": "(?i)jwk",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "JKU",
+        "description": "JKU - cryptography should be reviewed.",
+        "magic": "(?i)jku",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Password",
+        "description": "Password could be a secret and should be reviewed.",
+        "magic": "(?i)password",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Private",
+        "description": "private could be a secret and should be reviewed.",
+        "magic": "(?i)private",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Token",
+        "description": "Token could be a secret and should be reviewed.",
+        "magic": "(?i)token",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Secret",
+        "description": "Secret could be a secret and should be reviewed.",
+        "magic": "(?i)secret",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Key",
+        "description": "Key could be a secret and should be reviewed.",
+        "magic": "(?i)key",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "Authorization",
+        "description": "Authorization could be a secret and should be reviewed.",
+        "magic": "(?i)authorization",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "validate",
+        "description": "Validate can be indication of security rules being enforced, so these should be reviewed.",
+        "magic": "(?i)validate",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "verify",
+        "description": "Verify can be indication of security rules being enforced, so these should be reviewed.",
+        "magic": "(?i)verify",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "XML",
+        "description": "XML has had a number of security problems lately so use should be reviewed.",
+        "magic": "(?i)xml",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "xerces",
+        "description": "XML has had a number of security problems lately so use should be reviewed.",
+        "magic": "(?i)xerces",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "SAX",
+        "description": "XML has had a number of security problems lately so use should be reviewed.",
+        "magic": "(?i)sax",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "etree",
+        "description": "XML has had a number of security problems lately so use should be reviewed.",
+        "magic": "(?i)etree",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "XPath",
+        "description": "XML has had a number of security problems lately so use should be reviewed.",
+        "magic": "(?i)xpath",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    },
+    {
+        "name": "DocumentBuilder",
+        "description": "XML has had a number of security problems lately so use should be reviewed.",
+        "magic": "(?i)documentbuilder",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "badwords"
+        ]
+    }
+]
