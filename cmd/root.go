@@ -25,11 +25,15 @@ import (
 
 var cfgFile string
 var debug bool
+var tag string
+var ext string
+var compare string
+var threshold float64
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "crush",
-	Short: "Code review assist.",
+	Short: "Code review helps us.",
 	Long: `Find potential security issues by looking at code.
 	
 Many types of security issues cannot be found with static 
@@ -50,9 +54,24 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.crh.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.crush.yaml)")
 	rootCmd.PersistentFlags().BoolVar(&debug, "debug", false, "debug mode")
 	viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))
+
+	rootCmd.PersistentFlags().String("tag", "", "The tag for checks to run.")
+	viper.BindPFlag("tag", rootCmd.PersistentFlags().Lookup("tag"))
+
+	rootCmd.PersistentFlags().StringVar(&ext, "ext", "", "The file extension for checks to run.")
+	viper.BindPFlag("ext", rootCmd.PersistentFlags().Lookup("ext"))
+
+	rootCmd.PersistentFlags().String("compare", "", "The file to compare new results to.")
+	viper.BindPFlag("compare", rootCmd.PersistentFlags().Lookup("compare"))
+
+	rootCmd.PersistentFlags().Float64("threshold", 5.0, "The threshold of confidence we want to hold findings to.")
+	viper.BindPFlag("threshold", rootCmd.PersistentFlags().Lookup("threshold"))
+
+	log.SetFormatter(&log.TextFormatter{})
+	log.SetLevel(log.DebugLevel)
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -76,7 +95,7 @@ func initConfig() {
 
 		// Search config in home directory with name ".crh" (with extension!!!).
 		viper.AddConfigPath(home)
-		viper.SetConfigName(".crh")
+		viper.SetConfigName(".crush")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match

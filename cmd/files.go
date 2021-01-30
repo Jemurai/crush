@@ -1,4 +1,4 @@
-// Copyright © 2019-2020 Matt Konda <mkonda@jemurai.com>
+// Copyright © 2019-2021 Matt Konda <mkonda@jemurai.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 package cmd
 
 import (
+	"os"
 	"sync"
 	"time"
 
@@ -31,20 +32,20 @@ import (
 	"github.com/spf13/viper"
 )
 
-// examineCmd represents the share command
-var examineCmd = &cobra.Command{
-	Use:   "examine",
-	Short: "Examine a directory - and optionally run all the checks",
-	Long: `Examine all the source code in a directory.
+// secretsCmd represents the command to find secrets
+var filesCmd = &cobra.Command{
+	Use:   "files",
+	Short: "Find sensitive files",
+	Long: `Find sensitive files.
 	
-Behind the scenes, crush checks a variety of things.
-See the checks in /check and .json files.`,
+	For more information, see:  https://github.com/jemurai/crush
+	`,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		start := time.Now()
-		opts := buildExamineOptions(cmd, args)
-		log.Debugf("Examine command on: %s", opts.Directory)
-		checks := getAllChecks(opts)
+		opts := buildFilesOptions(cmd, args)
+		log.Debugf("Files command on: %s", opts.Directory)
+		checks := getFilesChecks(opts)
 		files := check.GetFiles(opts)
 		var findings []finding.Finding
 		var wg sync.WaitGroup
@@ -65,28 +66,32 @@ See the checks in /check and .json files.`,
 			check.PrintFindings(findings, checks, files)
 		}
 		utils.Timing(start, "Elasped time: %f")
-		log.Debug(opts)
-
 	},
 }
 
-func getAllChecks(opts options.Options) []check.Check {
+func getFilesChecks(opts options.Options) []check.Check {
 	var checks []check.Check
-	checks = append(checks, check.GetChecks("check/injections.json")...)
-	checks = append(checks, check.GetChecks("check/secrets.json")...)
 	checks = append(checks, check.GetChecks("check/files.json")...)
-	checks = append(checks, check.GetChecks("check/unescaped.json")...)
-	checks = append(checks, check.GetChecks("check/mobile.json")...)
-	checks = append(checks, check.GetChecks("check/badwords.json")...)
 	return checks
 }
 
-func buildExamineOptions(cmd *cobra.Command, args []string) options.Options {
+func buildFilesOptions(cmd *cobra.Command, args []string) options.Options {
 	directory := args[0]
+	if directory == "" {
+		path, err := os.Getwd()
+		if err != nil {
+			log.Println(err)
+		}
+		directory = path
+	}
 	tag := viper.GetString("tag")
 	ext := viper.GetString("ext")
 	compare := viper.GetString("compare")
 	threshold := viper.GetFloat64("threshold")
+
+	log.Debugf("ext: %s", ext)
+	log.Debugf("tag: %s", tag)
+	log.Debugf("debug: %b", debug)
 
 	options := options.Options{
 		Directory: directory,
@@ -107,5 +112,5 @@ func buildExamineOptions(cmd *cobra.Command, args []string) options.Options {
 }
 
 func init() {
-	rootCmd.AddCommand(examineCmd)
+	rootCmd.AddCommand(filesCmd)
 }

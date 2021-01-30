@@ -1,6 +1,7 @@
 package check
 
 import (
+	"encoding/json"
 	"regexp"
 	"strings"
 )
@@ -14,6 +15,11 @@ type Check struct {
 	Tags        []string `json:"tags"`
 	Ran         bool     `json:"ran"`
 	Threshold   float64  `json:"threshold"`
+}
+
+func (c Check) String() string {
+	s, _ := json.Marshal(c)
+	return string(s)
 }
 
 // CountHowManyRan - given an array of checks, how many ran.
@@ -82,7 +88,9 @@ func AppliesBasedOnThreshold(check Check, threshold float64) bool {
 // to avoid false positives where issues are in comments.
 func AppliesBasedOnComment(line string, ext string) bool {
 	trimmed := strings.TrimSpace(line)
-	if ext == ".rb" &&
+	if checkMatch(trimmed, "crushignore") {
+		return false
+	} else if ext == ".rb" &&
 		checkMatch(trimmed, "^#") {
 		return false
 	} else if ext == ".js" &&
