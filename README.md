@@ -16,7 +16,15 @@ Or use the GitHub Action.
 
 The most basic use will run the tool on a directory of code.
 
-`crush examine --directory /your/code/here`
+`crush examine /your/code/here`
+
+Examine is a general command that runs all of the checks.  You can also used specialized commands: 
+
+`crush secrets /your/dir`
+
+or 
+
+`crush files /your/dir`
 
 Generally you might want to specify extensions, tags or thresholds.  These help you to run the checks you really want or care about.  As you can imagine, just searching for certain strings can get noisy and some tuning can go a long way.
 
@@ -32,11 +40,11 @@ So you can specify:
 
 To run the docker image against a local directory, just do this: 
 
-`docker run -v <local-directory>:/tmp/toanalyze jemurai/crush:v examine --directory /tmp/toanalyze`
+`docker run -v <local-directory>:/tmp/toanalyze jemurai/crush:v examine /tmp/toanalyze`
 
 Of course, you can also run this with the above tags and thresholds:
 
-`docker run -v <localdir>:/tmp/target jemurai/crush:v examine --directory /tmp/target --tag badwords --threshold 1 --debug true`
+`docker run -v <localdir>:/tmp/target jemurai/crush:v examine /tmp/target --tag badwords --threshold 1 --debug true`
 
 This will generate a lot of output.
 
@@ -84,9 +92,9 @@ Get your source code by either:
 
 `git clone https://github.com/jemurai/crush` or `go get github.com/jemurai/crush`.
 
-Make changes.  Run locally without building.
+Make changes.  Run locally without building (eg. while testing).
 
-`go run crush.go examine --directory /your/code/here`
+`go run crush.go examine /your/code/here`
 
 ## Building Cross Platforms
 
@@ -119,7 +127,7 @@ Additional documentation will added here.
 ### Compare
 
 ```sh
-crush examine --compare <file of old findings> --directory /path/to/code
+crush examine --compare <file of old findings> /path/to/code
 ```
 
 This will produce JSON for added new findings in the current source (what is found in the directory).
