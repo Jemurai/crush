@@ -72,12 +72,12 @@ See the checks in /check and .json files.`,
 
 func getAllChecks(opts options.Options) []check.Check {
 	var checks []check.Check
-	checks = append(checks, check.GetChecks("check/injections.json")...)
-	checks = append(checks, check.GetChecks("check/secrets.json")...)
-	checks = append(checks, check.GetChecks("check/files.json")...)
-	checks = append(checks, check.GetChecks("check/unescaped.json")...)
-	checks = append(checks, check.GetChecks("check/mobile.json")...)
-	checks = append(checks, check.GetChecks("check/badwords.json")...)
+	checks = append(checks, check.GetChecks("checks/injections.json")...)
+	checks = append(checks, check.GetChecks("checks/secrets.json")...)
+	checks = append(checks, check.GetChecks("checks/files.json")...)
+	checks = append(checks, check.GetChecks("checks/unescaped.json")...)
+	checks = append(checks, check.GetChecks("checks/mobile.json")...)
+	checks = append(checks, check.GetChecks("checks/badwords.json")...)
 	return checks
 }
 

@@ -75,7 +75,7 @@ var secretsCmd = &cobra.Command{
 
 func getSecretsChecks(opts options.Options) []check.Check {
 	var checks []check.Check
-	checks = append(checks, check.GetChecks("check/secrets.json")...)
+	checks = append(checks, check.GetChecks("checks/secrets.json")...)
 	return checks
 }
 

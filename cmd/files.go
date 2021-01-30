@@ -71,7 +71,7 @@ var filesCmd = &cobra.Command{
 
 func getFilesChecks(opts options.Options) []check.Check {
 	var checks []check.Check
-	checks = append(checks, check.GetChecks("check/files.json")...)
+	checks = append(checks, check.GetChecks("checks/files.json")...)
 	return checks
 }
 

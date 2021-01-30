@@ -1,6 +1,6 @@
 module github.com/jemurai/crush
 
-go 1.13
+go 1.16
 
 require (
 	github.com/jemurai/fkit v1.0.2

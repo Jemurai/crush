@@ -57,7 +57,7 @@ put them into this tool because we want to review them.
 
 ## Check Anatomy
 
-You can find the checks in `/checks/*.json`.  They look like this: 
+You can find the checks in `check/checks/*.json`.  They look like this: 
 
 ```json
 [{

@@ -10,6 +10,8 @@ import (
 	"regexp"
 	"strconv"
 
+	"embed"
+
 	log "github.com/sirupsen/logrus"
 
 	"github.com/jemurai/crush/options"
@@ -17,26 +19,37 @@ import (
 	"github.com/jemurai/fkit/finding"
 )
 
+//go:embed checks/*
+var checkfs embed.FS
+
 // GetChecks - get the checks from the specified file.
+// Use either the checks embedded file system
+// or the local file system in case someone wants
+// to "bring their own" checks.
 func GetChecks(file string) []Check {
 	var checks []Check
+	data, err := checkfs.ReadFile(file)
+	if err != nil || data == nil {
+		log.Debug("Didn't find with packaged checks, looking for OS checks")
+		log.Debug(err)
 
-	// In regular file system, is at check/<name>.json.
-	// In Docker, is at:  /app/check/<name>.json
-	_, err := os.Stat(file)
-	if os.IsNotExist(err) {
-		file = "/app/" + file
+		_, err := os.Stat(file) // In regular file system, is at check/<name>.json.
+		if os.IsNotExist(err) { // In Docker, is at:  /app/check/<name>.json
+			file = "/app/" + file
+		}
+		log.Debugf("Getting checks for: %v", file)
+		rfile, err := os.Open(file)
+		if err != nil {
+			log.Error(err)
+		}
+		bytes, err := ioutil.ReadAll(rfile)
+		if err != nil {
+			log.Error(err)
+		}
+		json.Unmarshal(bytes, &checks)
+	} else {
+		json.Unmarshal(data, &checks)
 	}
-	log.Debugf("Getting checks for: %v", file)
-	rfile, err := os.Open(file)
-	if err != nil {
-		log.Error(err)
-	}
-	bytes, err := ioutil.ReadAll(rfile)
-	if err != nil {
-		log.Error(err)
-	}
-	json.Unmarshal(bytes, &checks)
 	return checks
 }
 
