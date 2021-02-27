@@ -19,7 +19,7 @@ jobs:
         with:
           ref: master
       - name: Crush Scan
-        uses: jemurai/crush@v1.0.4
+        uses: jemurai/crush@v1.0.5
         with:
           dir: .
           command: examine

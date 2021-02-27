@@ -6,7 +6,7 @@ pipelines:
       - step:
           name: Run Crush
           script:
-            - go get -u github.com/jemurai/crush@v1.0.4
+            - go get -u github.com/jemurai/crush@v1.0.5
             - crush version
             - crush secrets .
             - crush files .

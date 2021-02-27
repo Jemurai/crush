@@ -13,9 +13,9 @@ inputs:
     required: false
     default: 'examine'
   debug:
-    description: 'The directory to scan'
+    description: 'Debug output'
     required: false
-    default: 'true'
+    default: 'false'
   flags:
     description: 'Other flags'
     required: false
@@ -26,5 +26,6 @@ runs:
   args:
     - ${{ inputs.command }}
     - ${{ inputs.dir }}
+    - '--debug'
     - ${{ inputs.debug }}
     - ${{ inputs.flags }}
