@@ -23,16 +23,18 @@ import (
 var checkfs embed.FS
 
 // GetChecks - get the checks from the specified file.
-// Use either the checks embedded file system
+// Use either the checks embedded file system (see above)
 // or the local file system in case someone wants
 // to "bring their own" checks.
 func GetChecks(file string) []Check {
 	var checks []Check
+	// This loads the packaged items
 	data, err := checkfs.ReadFile(file)
+
+	// This (in theory) loads the
 	if err != nil || data == nil {
 		log.Debug("Didn't find with packaged checks, looking for OS checks")
 		log.Debug(err)
-
 		_, err := os.Stat(file) // In regular file system, is at check/<name>.json.
 		if os.IsNotExist(err) { // In Docker, is at:  /app/check/<name>.json
 			file = "/app/" + file
