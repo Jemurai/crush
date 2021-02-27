@@ -1,0 +1,13 @@
+image: golang:1.16
+
+pipelines:
+  default:
+    - parallel:
+      - step:
+          name: Run Crush
+          script:
+            - go get -u github.com/jemurai/crush@v1.0.3
+            - crush version
+            - crush secrets .
+            - crush files .
+            - crush examine --threshold 6 --tag badwords .

@@ -6,14 +6,25 @@ branding:
 inputs:
   dir: 
     description: 'The directory to scan'
-    required: true
+    required: false
     default: '.'
+  command:
+    description: 'The command to run'
+    required: false
+    default: 'examine'
+  debug:
+    description: 'The directory to scan'
+    required: false
+    default: 'true'
+  flags:
+    description: 'Other flags'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - 'examine'
-    - '--debug'
-    - 'true'
-    - '--directory'
+    - ${{ inputs.command }}
     - ${{ inputs.dir }}
+    - ${{ inputs.debug }}
+    - ${{ inputs.flags }}
