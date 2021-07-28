@@ -1,4 +1,4 @@
-// Copyright © 2019 Matt Konda <mkonda@jemurai.com>
+// Copyright © 2019-2021 Matt Konda <mkonda@jemurai.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var versionString = "1.0.5"
+var versionString = "1.0.6"
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
