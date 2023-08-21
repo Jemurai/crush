@@ -132,6 +132,16 @@ crush examine --compare <file of old findings> /path/to/code
 
 This will produce JSON for added new findings in the current source (what is found in the directory).
 
+## Releasing
+
+Crush works to follow golang best practices.  Therefore, when updating, we need to do the following:
+
+- `go get -u` 
+- `go mod tidy`
+- `git commit -m "change with version"`
+- `git tag v1.0.6`
+- `git push origin v1.0.6`
+
 ## Issues and Roadmap 
 
 Are tracked in [GitHub Issues](https://github.com/jemurai/crush/issues/).
