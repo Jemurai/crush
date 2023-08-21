@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Social Security Number",
+        "description": "It looks like you might have SSN's here.",
+        "magic": "ssn",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "Social Security Number",
+        "description": "It looks like you might have SSN's here.",
+        "magic": "socialsecuritynumber",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "Birthday",
+        "description": "It looks like you might have birthday's here.",
+        "magic": "birthday",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    }
+]
