@@ -28,7 +28,7 @@ or
 
 Generally you might want to specify extensions, tags or thresholds.  These help you to run the checks you really want or care about.  As you can imagine, just searching for certain strings can get noisy and some tuning can go a long way.
 
-So you can specify: 
+So you can specify:
 
 1. Threshold: `--threshold 2` - this tells Crush only to check the things that have a higher threshold than specified.  The default is 5.  You can see the values on the checks in the JSON files.
 
@@ -118,8 +118,8 @@ To build and push the docker image to dockerhub:
 
 ## Advanced Usage
 
-Crush provides some advanced options (tags, extensions and 
-threshold) as configurable knobs you can turn to try to ensure 
+Crush provides some advanced options (tags, extensions and
+threshold) as configurable knobs you can turn to try to ensure
 that you get the results you want.
 
 Additional documentation will added here.
@@ -136,11 +136,12 @@ This will produce JSON for added new findings in the current source (what is fou
 
 Crush works to follow golang best practices.  Therefore, when updating, we need to do the following:
 
-- `go get -u` 
+- `go get -u`
 - `go mod tidy`
+- Update `cmd/version.go`
 - `git commit -m "change with version"`
 - `git tag v1.0.6`
-- `git push origin v1.0.6`
+- `git push origin --tags`
 
 ## Issues and Roadmap 
 
