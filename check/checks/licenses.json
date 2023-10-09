@@ -1,0 +1,24 @@
+[
+    {
+        "name": "LGPL",
+        "description": "It looks like you might be using LGPL.",
+        "magic": "LGPL",
+        "threshold": 8.0,
+        "exts" : [
+        ],
+        "tags": [
+            "licenses"
+        ]
+    },
+    {
+        "name": "LGPL",
+        "description": "It looks like you might be using LGPL.",
+        "magic": "GNU Lesser General Public License",
+        "threshold": 8.0,
+        "exts" : [
+        ],
+        "tags": [
+            "licenses"
+        ]
+    }
+]
