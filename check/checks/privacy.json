@@ -3,7 +3,7 @@
         "name": "Social Security Number",
         "description": "It looks like you might have SSN's here.",
         "magic": "ssn",
-        "threshold": 4.0,
+        "threshold": 1.0,
         "exts" : [
         ],
         "tags": [
@@ -25,6 +25,83 @@
         "name": "Birthday",
         "description": "It looks like you might have birthday's here.",
         "magic": "birthday",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "DOB",
+        "description": "It looks like you might have birthdays here.",
+        "magic": " dob ",
+        "threshold": 1.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "First Name",
+        "description": "It looks like you might have names here.",
+        "magic": "firstname",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "First Name",
+        "description": "It looks like you might have names here.",
+        "magic": "fname",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "Last Name",
+        "description": "It looks like you might have names here.",
+        "magic": "lname",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "Address",
+        "description": "It looks like you might have addresses here.",
+        "magic": "address",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "Address",
+        "description": "It looks like you might have addresses here.",
+        "magic": "street",
+        "threshold": 4.0,
+        "exts" : [
+        ],
+        "tags": [
+            "privacy"
+        ]
+    },
+    {
+        "name": "Email",
+        "description": "It looks like you might have addresses here.",
+        "magic": "email",
         "threshold": 4.0,
         "exts" : [
         ],
