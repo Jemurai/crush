@@ -3,7 +3,7 @@
         "name": "LGPL",
         "description": "It looks like you might be using LGPL.",
         "magic": "LGPL",
-        "threshold": 8.0,
+        "threshold": 3.0,
         "exts" : [
         ],
         "tags": [
@@ -14,6 +14,72 @@
         "name": "LGPL",
         "description": "It looks like you might be using LGPL.",
         "magic": "GNU Lesser General Public License",
+        "threshold": 3.0,
+        "exts" : [
+        ],
+        "tags": [
+            "licenses"
+        ]
+    },
+    {
+        "name": "AGPL",
+        "description": "It looks like you might be using AGPL.",
+        "magic": "GNU Affero General Public License",
+        "threshold": 8.0,
+        "exts" : [
+        ],
+        "tags": [
+            "licenses"
+        ]
+    },
+    {
+        "name": "AGPL",
+        "description": "It looks like you might be using AGPL.",
+        "magic": "Affero",
+        "threshold": 8.0,
+        "exts" : [
+        ],
+        "tags": [
+            "licenses"
+        ]
+    },
+    {
+        "name": "AGPL",
+        "description": "It looks like you might be using LGPL.",
+        "magic": "AGPL",
+        "threshold": 8.0,
+        "exts" : [
+        ],
+        "tags": [
+            "licenses"
+        ]
+    },
+    {
+        "name": "CeCill",
+        "description": "It looks like you might be using CeCILL.",
+        "magic": "CeCILL",
+        "threshold": 8.0,
+        "exts" : [
+        ],
+        "tags": [
+            "licenses"
+        ]
+    },
+    {
+        "name": "EUPL",
+        "description": "It looks like you might be using EUPL.",
+        "magic": "EUPL",
+        "threshold": 8.0,
+        "exts" : [
+        ],
+        "tags": [
+            "licenses"
+        ]
+    },
+    {
+        "name": "OSL",
+        "description": "It looks like you might be using OSL.",
+        "magic": "Open Source License",
         "threshold": 8.0,
         "exts" : [
         ],
